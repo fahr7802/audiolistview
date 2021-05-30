@@ -93,18 +93,19 @@ public class MainActivity extends AppCompatActivity {
                     tvMP3.setTextColor(Color.BLUE);
                     //동작 부분
                     new Thread() {
-                        //SimpleDateFormat timeformat = new SimpleDateFormat("mm:ss");
+                        SimpleDateFormat timeformat = new SimpleDateFormat("mm:ss");
 
                         @Override
                         public void run() {
                             if (mplayer == null)
                                 return;
                             seek.setMax(mplayer.getDuration());
-                            while (mplayer.isPlaying()){
+                            while (mplayer.isPlaying()) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         seek.setProgress(mplayer.getCurrentPosition());
+                                        tvtime.setText("진행시간 : " + timeformat.format(mplayer.getCurrentPosition()));
                                     }
                                 });
                                 SystemClock.sleep(200);
